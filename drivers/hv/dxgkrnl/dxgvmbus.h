@@ -242,7 +242,7 @@ struct dxgkvmb_command_setexistingsysmemstore {
 	struct dxgkvmb_command_vgpu_to_host hdr;
 	struct d3dkmthandle		device;
 	struct d3dkmthandle		allocation;
-	u32				gpadl;
+	struct vmbus_gpadl		gpadl;
 };
 
 struct dxgkvmb_command_createprocess {

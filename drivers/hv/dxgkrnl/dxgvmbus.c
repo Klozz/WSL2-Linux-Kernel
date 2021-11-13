@@ -1356,7 +1356,7 @@ int create_existing_sysmem(struct dxgdevice *device,
 		ret = -ENOMEM;
 		goto cleanup;
 	}
-	dev_dbg(dxgglobaldev, "New gpadl %d", dxgalloc->gpadl);
+	dev_dbg(dxgglobaldev, "New gpadl %u", dxgalloc->gpadl.gpadl_handle);
 
 	command_vgpu_to_host_init2(&set_store_command->hdr,
 				   DXGK_VMBCOMMAND_SETEXISTINGSYSMEMSTORE,

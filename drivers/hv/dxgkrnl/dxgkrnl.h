@@ -25,6 +25,7 @@
 #include <linux/gfp.h>
 #include <linux/miscdevice.h>
 #include <linux/pci.h>
+#include <linux/hyperv.h>
 
 struct dxgprocess;
 struct dxgadapter;
@@ -695,7 +696,7 @@ struct dxgallocation {
 	u32				cached:1;
 	u32				handle_valid:1;
 	/* GPADL address list for existing sysmem allocations */
-	u32				gpadl;
+	struct vmbus_gpadl		gpadl;
 	/* Number of pages in the 'pages' array */
 	u32				num_pages;
 	/*
