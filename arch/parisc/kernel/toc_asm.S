@@ -13,15 +13,17 @@
 	.import toc_stack,data
 	.align 16
 ENTRY_CFI(toc_handler)
+	load32	PA(toc_stack),%sp
+
+#ifdef CONFIG_SMP
+	/* get per-cpu toc_stack address. */
 	mfctl   %cr30, %r1
 	tophys  %r1,%r2			/* task_struct */
 	LDREG   TASK_TI_CPU(%r2),%r4	/* cpu */
-
-	/* get per-cpu toc_stack address. */
-	load32	PA(toc_stack),%sp
 	load32	PA(__per_cpu_offset),%r1
 	LDREGX  %r4(%r1),%r4
 	add	%r4,%sp,%sp
+#endif
 
 	/*
 	 * setup pt_regs on stack and save the

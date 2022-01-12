@@ -63,7 +63,7 @@ Before running the tests, kunit_tool ensures that all config options
 set in ``.kunitconfig`` are set in the kernel ``.config``. It will warn
 you if you have not included dependencies for the options used.
 
-.. note::
+.. note ::
    If you change the ``.kunitconfig``, kunit.py will trigger a rebuild of the
    ``.config`` file. But you can edit the ``.config`` file directly or with
    tools like ``make menuconfig O=.kunit``. As long as its a superset of

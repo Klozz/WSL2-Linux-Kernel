@@ -281,6 +281,7 @@ usb-chipidea-next	git	git://git.kernel.org/pub/scm/linux/kernel/git/peter.chen/u
 tty		git	git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/tty.git#tty-next
 char-misc	git	git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc.git#char-misc-next
 extcon		git	git://git.kernel.org/pub/scm/linux/kernel/git/chanwoo/extcon.git#extcon-next
+gnss		git	git://git.kernel.org/pub/scm/linux/kernel/git/johan/gnss.git#gnss-next
 phy-next	git	git://git.kernel.org/pub/scm/linux/kernel/git/phy/linux-phy.git#next
 soundwire	git	git://git.kernel.org/pub/scm/linux/kernel/git/vkoul/soundwire.git#next
 thunderbolt	git	git://git.kernel.org/pub/scm/linux/kernel/git/westeri/thunderbolt.git#next
@@ -317,7 +318,6 @@ seccomp		git	git://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.git#for-ne
 kspp		git	git://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.git#for-next/kspp
 kspp-gustavo	git	git://git.kernel.org/pub/scm/linux/kernel/git/gustavoars/linux.git#for-next/kspp
 cisco		git	https://github.com/daniel-walker/cisco-linux.git#for-next
-gnss		git	git://git.kernel.org/pub/scm/linux/kernel/git/johan/gnss.git#gnss-next
 fsi		git	git://git.kernel.org/pub/scm/linux/kernel/git/joel/fsi.git#next
 slimbus		git	git://git.kernel.org/pub/scm/linux/kernel/git/srini/slimbus.git#for-next
 nvmem		git	git://git.kernel.org/pub/scm/linux/kernel/git/srini/nvmem.git#for-next

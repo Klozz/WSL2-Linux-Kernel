@@ -1450,7 +1450,7 @@ static int amdgpu_device_init_apu_flags(struct amdgpu_device *adev)
 			adev->apu_flags |= AMD_APU_IS_CYAN_SKILLFISH2;
 		break;
 	default:
-		return -EINVAL;
+		break;
 	}
 
 	return 0;
@@ -3307,9 +3307,9 @@ static void amdgpu_device_xgmi_reset_func(struct work_struct *__work)
 		if (adev->asic_reset_res)
 			goto fail;
 
-		if (adev->mmhub.ras_funcs &&
-		    adev->mmhub.ras_funcs->reset_ras_error_count)
-			adev->mmhub.ras_funcs->reset_ras_error_count(adev);
+		if (adev->mmhub.ras && adev->mmhub.ras->ras_block.hw_ops &&
+		    adev->mmhub.ras->ras_block.hw_ops->reset_ras_error_count)
+			adev->mmhub.ras->ras_block.hw_ops->reset_ras_error_count(adev);
 	} else {
 
 		task_barrier_full(&hive->tb);
@@ -3499,9 +3499,7 @@ int amdgpu_device_init(struct amdgpu_device *adev,
 	mutex_init(&adev->notifier_lock);
 	mutex_init(&adev->pm.stable_pstate_ctx_lock);
 
-	r = amdgpu_device_init_apu_flags(adev);
-	if (r)
-		return r;
+	 amdgpu_device_init_apu_flags(adev);
 
 	r = amdgpu_device_check_arguments(adev);
 	if (r)
@@ -3521,6 +3519,8 @@ int amdgpu_device_init(struct amdgpu_device *adev,
 	mutex_init(&adev->shadow_list_lock);
 
 	INIT_LIST_HEAD(&adev->reset_list);
+
+	INIT_LIST_HEAD(&adev->ras_list);
 
 	INIT_DELAYED_WORK(&adev->delayed_init_work,
 			  amdgpu_device_delayed_init_work_handler);
@@ -4657,9 +4657,9 @@ int amdgpu_do_asic_reset(struct list_head *device_list_handle,
 
 	if (!r && amdgpu_ras_intr_triggered()) {
 		list_for_each_entry(tmp_adev, device_list_handle, reset_list) {
-			if (tmp_adev->mmhub.ras_funcs &&
-			    tmp_adev->mmhub.ras_funcs->reset_ras_error_count)
-				tmp_adev->mmhub.ras_funcs->reset_ras_error_count(tmp_adev);
+			if (tmp_adev->mmhub.ras && tmp_adev->mmhub.ras->ras_block.hw_ops &&
+			    tmp_adev->mmhub.ras->ras_block.hw_ops->reset_ras_error_count)
+				tmp_adev->mmhub.ras->ras_block.hw_ops->reset_ras_error_count(tmp_adev);
 		}
 
 		amdgpu_ras_intr_cleared();
